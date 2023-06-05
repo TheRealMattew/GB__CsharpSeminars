@@ -1,90 +1,102 @@
 ﻿// -----------------------------------------------------------------------------------------------------------------
-// Задача 19: Напишите программу, которая принимает на вход пятизначное число и проверяет, является ли оно палиндромом.
+// Задача 25: Напишите цикл, который принимает на вход два числа (A и B) и возводит число A в натуральную степень B.
 // -----------------------------------------------------------------------------------------------------------------
-//*
-Console.WriteLine("Задача 19. || Программа проверяет, является ли введенное чило полиндромом.");
-Console.Write("Введите целое число: ");
-int num = Convert.ToInt32(Console.ReadLine());
+/*
+Console.WriteLine("Задача 25. || Программа возводит, первое введенное число в степень, равную второму введенному числу. Второе число - натуральное!");
 
-bool IfPalindrom(int num)
+bool CheckInput(int number)
 {
-    num = Math.Abs(num);
-    int NmbOfSign = 1;
-    int tmp = num;
-
-    while(tmp/10 > 0)
-    {
-        NmbOfSign++;
-        tmp = tmp/10;
-    }
-
     bool answer = true;
-    if (NmbOfSign == 1) return answer;
-  
-    for (int i = 1; i <= NmbOfSign/2; i++)
-    {
-        int dec1 = (int)Math.Pow(10,i-1);
-        int dec2 = (int)Math.Pow(10,NmbOfSign-i);
-
-        int signfirst = (num/dec1)%10;
-        int signsecond = (num/dec2)%10;
-        if(signfirst != signsecond) answer = false;
-    }
-
+    if (number <= 0 || number%1 != 0) answer = false;
     return answer;
 }
 
-if (IfPalindrom(num)) Console.WriteLine("Ответ: Введенное число - палиндром");
-else Console.WriteLine("Ответ: Введенное число не является палиндромом");
-//*/
-
-
-// -----------------------------------------------------------------------------------------------------------------
-// Задача 21: Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 3D пространстве.
-// -----------------------------------------------------------------------------------------------------------------
-/*
-Console.WriteLine("Задача 21. || Программа вычисляет расстояние между двумя точками c точностью до 0,01.");
-Console.WriteLine("Последовательно введите координаты первой точки (x, y, z):");
-double x1 = Convert.ToDouble(Console.ReadLine());
-double y1 = Convert.ToDouble(Console.ReadLine());
-double z1 = Convert.ToDouble(Console.ReadLine());
-
-Console.WriteLine("Последовательно введите координаты второй точки (x, y, z):");
-double x2 = Convert.ToDouble(Console.ReadLine());
-double y2 = Convert.ToDouble(Console.ReadLine());
-double z2 = Convert.ToDouble(Console.ReadLine());
-
-double Distance3D(double x1, double y1, double z1, double x2, double y2, double z2)
+double MyPower(double numb1, int numb2)
 {
-    double result = Math.Sqrt(Math.Pow(x1-x2,2) + Math.Pow(y1-y2,2) + Math.Pow(z1-z2,2));
-    return result = Math.Round(result, 2);
-}
-Console.WriteLine($"Ответ: Расстояние между двумя точками равно: {Distance3D(x1,y1,z1,x2,y2,z2)}");
-//*/
-
-
-// -----------------------------------------------------------------------------------------------------------------
-// Задача 23: Напишите программу, которая принимает на вход число (N) и выдаёт таблицу кубов чисел от 1 до N.
-// -----------------------------------------------------------------------------------------------------------------
-/*
-Console.WriteLine("Задача 23. || Программа выдает таблицу кубов от 1 до N при N >= 1.");
-Console.Write("Введите число: ");
-int num = Convert.ToInt32(Console.ReadLine());
-
-string TheRowOf3rd(int num)
-{
-    string result = "";
-    if( num <= 0) return "Введенное число не удовлетворяет условию!";
-    else
-    {
-        for (int i = 1; i < num; i++)
+    double result = 1;
+    for (int i = 1; i <= numb2; i++)
         {
-            result = result + $"{i*i*i}" + ", ";
+            result = result *numb1;
         }
-
-    }
-    return result = result + $"{num*num*num}" + ".";
+    return result;
 }
 
-Console.WriteLine("Ответ: " + TheRowOf3rd(num));
+Console.Write("Введите первое число: ");
+double num1 = Convert.ToDouble(Console.ReadLine());
+Console.Write("Введите второе число (натуральное): ");
+int num2 = Convert.ToInt32(Console.ReadLine());
+
+if (CheckInput(num2)) Console.WriteLine($"Ответ: {MyPower(num1, num2)}");
+else
+{
+    Console.WriteLine("Введенные данные не соответствуют условию!");
+}
+
+// Можно было проще, учитывая, что уже использовали эту функцию...
+// double result = Math.Pow(num1,num2);
+// Console.WriteLine($"Ответ: {result}");
+//*/
+
+
+// -----------------------------------------------------------------------------------------------------------------
+// Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
+// -----------------------------------------------------------------------------------------------------------------
+/*
+Console.WriteLine("Задача 27. || Программа вычисляет сумму цифр введенного целого числа.");
+
+int SumOfNumerals(int numb)
+{
+    int result = 0;
+    int inputNmb = Math.Abs(numb);
+
+    while (inputNmb > 0)
+    {
+        result = result + inputNmb%10;
+        inputNmb = inputNmb/10;
+    }
+    
+    return result;
+}
+
+Console.WriteLine("Введите число:");
+int inputNumber = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine($"Ответ: Сумма цифр введенного числа = {SumOfNumerals(inputNumber)}");
+//*/
+
+
+// -----------------------------------------------------------------------------------------------------------------
+// Задача 29: Напишите программу, которая задаёт массив из 8 элементов и выводит их на экран.
+// -----------------------------------------------------------------------------------------------------------------
+//*
+Console.WriteLine("Задача 29. || Программа создает массив случайных чисел.");
+
+int[] GenerateArray(int length, int minval, int maxval)
+{
+    int[] result = new int[length];
+    for (int i = 0; i < length; i++)
+    {
+        result[i] = new Random().Next(minval, maxval+1);
+    }
+    return result;
+}
+
+void PrintArray(int[] arr)
+{
+    for (int i = 0; i < arr.Length; i++)
+    {
+        Console.Write($"{arr[i]} ");
+    }
+    Console.WriteLine();
+}
+
+Console.Write("Введите нужную длину массива: ");
+int arrlength = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите мин значение: ");
+int arrmin = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите макс значение: ");
+int arrmax = Convert.ToInt32(Console.ReadLine());
+
+int[] A = GenerateArray(arrlength, arrmin, arrmax);
+PrintArray(A);
+
 //*/
