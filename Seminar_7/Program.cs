@@ -117,7 +117,7 @@ int[,] Generate2DArray(int rows, int columns, int minval, int maxval)
     {
         for (int j = 0; j < columns; j++)
         {
-            result[i, j] = new Random().Next(minval, maxval) + 1;
+            result[i, j] = new Random().Next(minval, maxval+1);
         }
     }
     return result;
